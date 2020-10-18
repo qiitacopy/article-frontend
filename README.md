@@ -30,6 +30,13 @@
 
 - ESLint 関連ツールインストールは.devcontainer ではなく、アプリケーションプロジェクトの package.json の方に記述する
 
+## コマンド
+```sh
+protoc --proto_path=./src/grpcspec/ .src/grpcspec/article.proto --js_out=import_style=commonjs:./src/grpc --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./src/grpc
+```
+* grpc clinent作成
+
+
 ## 参考
 
 - [Vue.js 公式](https://v3.vuejs.org/guide/installation.html#release-notes)

@@ -3,7 +3,7 @@
     <Header />
     <v-conntent>
       <v-row>
-        <ArticleList></ArticleList>
+        <v-col><ArticleList /></v-col>
       </v-row>
     </v-conntent>
   </v-app>
