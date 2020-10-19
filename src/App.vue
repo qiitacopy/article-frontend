@@ -1,11 +1,12 @@
 <template>
   <v-app>
     <Header />
-    <v-conntent>
+    <v-main>
       <v-row>
         <v-col><ArticleList /></v-col>
       </v-row>
-    </v-conntent>
+    </v-main>
+    <v-footer color="green" dense dark> Qiitacopy </v-footer>
   </v-app>
 </template>
 

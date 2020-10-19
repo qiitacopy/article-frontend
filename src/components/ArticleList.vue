@@ -1,10 +1,35 @@
 <template>
   <div>
-    <h1>記事取得</h1>
-    <button class="btn btn-primary" @click="getAeticle">GetArticle</button>
-    <h2>Result: {{ article }}</h2>
-    <h2>Button: {{ msg }}</h2>
-    <h2>ReturnMsg: {{ returnMsg }}</h2>
+    <v-row
+      ><v-col cols="12" sm="6" md="3">
+        <v-card class="mx-auto" max-width="300" tile>
+          <v-list flat>
+            <v-subheader>記事フィード</v-subheader>
+            <v-list-item-group v-model="item" color="primary">
+              <v-list-item v-for="(item, i) in items" :key="i">
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-col>
+      <v-col>
+        <h1>記事取得</h1>
+        <v-col cols="12" sm="6" md="3">
+          <v-text-field v-model="AerticleId" label="記事ID" type="text">
+            <template #append-outer>
+              <v-btn color="primary" @click="getAeticle()">取得</v-btn>
+            </template>
+          </v-text-field>
+        </v-col>
+        <h2>Result: {{ article }}</h2>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -17,7 +42,13 @@ export default {
   data() {
     return {
       article: Object,
-      msg: 'start'
+      AerticleId: 1,
+      item: 1,
+      items: [
+        { text: 'トレンド', icon: 'mdi-trending-up' },
+        { text: 'タイムライン', icon: 'mdi-account-group' },
+        { text: 'タグ', icon: 'mdi-tag-multiple' }
+      ]
     }
   },
   created() {
@@ -28,18 +59,14 @@ export default {
     )
   },
   methods: {
-    getAeticle: function () {
+    getAeticle() {
       let request = new GetByIDRequest()
-      request.setId(1)
-      this.client.getAeticle(request, {}, (err, response) => {
+      request.setId(this.AerticleId)
+      this.client.getByID(request, {}, (err, response) => {
         if (err) console.log(err)
         console.log(response.toObject())
         this.article = response.toObject()
-        this.msg = 'put'
       })
-    },
-    returnMsg: function () {
-      return 'Return Message'
     }
   }
 }
